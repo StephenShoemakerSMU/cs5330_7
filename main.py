@@ -20,13 +20,18 @@ papers.create_index("name")
 
 def addAuthor(entries):
     try:
+        author = {}
         for ent in entries:
+            print(ent)
+            author[ent] = entries[ent].get()
+
             print(entries[ent].get())
+        authors.insert_one(author)
     except ValueError:
         pass
 
 
-def makeform(root, fields):
+def submitForm(root, fields,title):
     entries = {}
     for field in fields:
         row = Frame(root)
@@ -40,13 +45,14 @@ def makeform(root, fields):
 
     row = Frame(root)
     row.pack(side = TOP, fill = X, padx = 5 , pady = 5)
-    Button(row, width=22, text="Submit Author",command=lambda e =entries: addAuthor(e)).pack(side="left")
+    Button(row, width=22, text=title,command=lambda e =entries: addAuthor(e)).pack(side="left")
     return entries
+
 
 authorFields=("First Name", "Last Name", "Organization", "Start Year", "Last Year")
 
 root = Tk()
-makeform(root,authorFields)
+submitForm(root,authorFields,"Submit Author")
 
 root.mainloop()
 
