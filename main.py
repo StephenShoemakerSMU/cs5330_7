@@ -81,6 +81,14 @@ def getPaperListByAuthor(fname, lname):
 
     return result
 
+def getPublicationPapers(publication, start, end):
+    output = []
+    for paper in papers.find({"publication.name":publication, "publication.year": {"$gt": start, "$lt": end}}):
+        output.append(paper)
+    return output
+    
+    
+
 if __name__ == "__main__":
     doc = { 
         'title':"Test", 
@@ -111,7 +119,7 @@ if __name__ == "__main__":
     submitPaper(doc)
 
     
-    print(getPaperListByAuthor("Dave", "Applebee"))
+    print(getPublicationPapers("CS Journal", 1990,1992))
 
 
 
