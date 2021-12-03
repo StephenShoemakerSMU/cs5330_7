@@ -57,34 +57,46 @@ def submitPaper(paper):
             
             papers.insert_one(paper)
 
+def getPaper(name):
+    paper = papers.find_one({"title":name})
 
-doc = { 
-    'title':"Test", 
-    'authors': [
-        {
-            "fname": "Bob",
-            "lname": "Bobbson",
-            "organization": "SMU",
-            "startYear": 1992,
-            "endYear": 1997
-        },
-        {
-            "fname": "Dave",
-            "lname": "Applebee",
-            "organization":"Applebees",
-            "startYear": 1992,
-            "endYear": 1995
-        }],
-    "publication": {
-        "name": "CS Journal",
-        "month": "January",
-        "year": 1994,
-        "type": "Journal"
+    resultAuthors = []
+    for authorId in paper["authors"]:
+        resultAuthors.append(authors.find_one({"_id":authorId}))
+
+    paper["authors"] = resultAuthors
+    return paper
+
+if __name__ == "__main__":
+    doc = { 
+        'title':"Test", 
+        'authors': [
+            {
+                "fname": "Bob",
+                "lname": "Bobbson",
+                "organization": "SMU",
+                "startYear": 1992,
+                "endYear": 1997
+            },
+            {
+                "fname": "Dave",
+                "lname": "Applebee",
+                "organization":"Applebees",
+                "startYear": 1992,
+                "endYear": 1995
+            }],
+        "publication": {
+            "name": "CS Journal",
+            "month": "January",
+            "year": 1994,
+            "type": "Journal"
+        }
     }
-}
 
 
-submitPaper(doc)
+    submitPaper(doc)
+
+    print(getPaper("Test"))
 
 
 
