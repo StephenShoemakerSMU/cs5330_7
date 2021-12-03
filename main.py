@@ -67,6 +67,20 @@ def getPaper(name):
     paper["authors"] = resultAuthors
     return paper
 
+def getPaperListByAuthor(fname, lname):
+    authorIds = authors.find({"fname":fname,"lname":lname})
+
+    result = []
+
+    for author in authorIds:
+        author["papers"] = []
+        for paper in papers.find({"authors":author["_id"]}):
+            author["papers"].append(paper)
+        
+        result.append(author)
+
+    return result
+
 if __name__ == "__main__":
     doc = { 
         'title':"Test", 
@@ -96,7 +110,8 @@ if __name__ == "__main__":
 
     submitPaper(doc)
 
-    print(getPaper("Test"))
+    
+    print(getPaperListByAuthor("Dave", "Applebee"))
 
 
 
