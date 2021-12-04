@@ -154,6 +154,9 @@ lbl8.grid(column=0, row=8)
 txt8 = Entry(inputInfoWindow, width=10)
 txt8.grid(column=1, row=8)
 
+
+authorEntryList = []
+
 def clickedEnter():
     info = txt.get()
     info1 = txt1.get()
@@ -174,6 +177,13 @@ def clickedEnter():
     print(info7)
     print(info8)
 
+    transformedAuthorList=[]
+    for author in authorEntryList:
+        transformedAuthor = {}
+        for label in author["label"].keys():
+            transformedAuthor[label]=author["entry"][label].get()
+        transformedAuthorList.append(transformedAuthor)
+
     txt.delete(0, END)
     txt1.delete(0, END)
     txt2.delete(0, END)
@@ -187,16 +197,24 @@ def clickedEnter():
     print("Paper info entered.")
 
 count = 0
-def clickedAddAuthor():
-    global count
-    count += 1
 
-    name = '%sAlbl' % count
+
+def addAuthor():
+    global count
+    entry = {}
+    label = {}
+    author = {}
+
+    
     name = Label(inputInfoWindow, text="Author First Name: ")
     name.grid(column=0, row=9 + 6*count)
 
+
     Atxt = Entry(inputInfoWindow, width=10)
     Atxt.grid(column=1, row=9 + 6*count)
+
+    label["fname"] = name
+    entry["fname"] = Atxt
 
     Albl1 = Label(inputInfoWindow, text="Author Last Name: ")
     Albl1.grid(column=0, row=10 + 6*count)
@@ -204,11 +222,17 @@ def clickedAddAuthor():
     Atxt1 = Entry(inputInfoWindow, width=10)
     Atxt1.grid(column=1, row=10 + 6*count)
 
+    label["lname"] = name
+    entry["lname"] = Atxt1
+
     Albl2 = Label(inputInfoWindow, text="Organization Name: ")
     Albl2.grid(column=0, row=11 + 6*count)
 
     Atxt2 = Entry(inputInfoWindow, width=10)
     Atxt2.grid(column=1, row=11 + 6*count)
+
+    label["organization"] = Albl2
+    entry["organization"] = Atxt2
 
     Albl3 = Label(inputInfoWindow, text="Employment Start Year: ")
     Albl3.grid(column=0, row=12 + 6*count)
@@ -216,50 +240,38 @@ def clickedAddAuthor():
     Atxt3 = Entry(inputInfoWindow, width=10)
     Atxt3.grid(column=1, row=12 + 6*count)
 
+    label["startYear"] = Albl3
+    entry["startYear"] = Atxt3
+
     Albl4 = Label(inputInfoWindow, text="Employment End Year: ")
     Albl4.grid(column=0, row=13 + 6*count)
 
     Atxt4 = Entry(inputInfoWindow, width=10)
     Atxt4.grid(column=1, row=13 + 6*count)
 
-btn = Button(inputInfoWindow, text="Add Author", command=clickedAddAuthor)
+    label["endYear"] = Albl3
+    entry["endYear"] = Atxt3
+
+    author["entry"] = entry
+    author["label"] = label
+
+    authorEntryList.append(author)
+    count+=1
+    
+
+addAuthor()
+
+
+
+
+btn = Button(inputInfoWindow, text="Add Author", command=addAuthor)
 btn.grid(column=0, row=998)
 
 btn1 = Button(inputInfoWindow, text="Enter", command=clickedEnter)
 btn1.grid(column=999, row=999)
 
-Albl = Label(inputInfoWindow, text="Author Info:")
-Albl.grid(column=0, row=9)
 
-Albl = Label(inputInfoWindow, text="Author First Name: ")
-Albl.grid(column=0, row=10)
 
-Atxt = Entry(inputInfoWindow, width=10)
-Atxt.grid(column=1, row=10)
-
-Albl1 = Label(inputInfoWindow, text="Author Last Name: ")
-Albl1.grid(column=0, row=11)
-
-Atxt1 = Entry(inputInfoWindow, width=10)
-Atxt1.grid(column=1, row=11)
-
-Albl2 = Label(inputInfoWindow, text="Organization Name: ")
-Albl2.grid(column=0, row=12)
-
-Atxt2 = Entry(inputInfoWindow, width=10)
-Atxt2.grid(column=1, row=12)
-
-Albl3 = Label(inputInfoWindow, text="Employment Start Year: ")
-Albl3.grid(column=0, row=13)
-
-Atxt3 = Entry(inputInfoWindow, width=10)
-Atxt3.grid(column=1, row=13)
-
-Albl4 = Label(inputInfoWindow, text="Employment End Year: ")
-Albl4.grid(column=0, row=14)
-
-Atxt4 = Entry(inputInfoWindow, width=10)
-Atxt4.grid(column=1, row=14)
 '''
 def clickedAEnter():
     Ainfo = Atxt.get()
