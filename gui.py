@@ -157,7 +157,6 @@ PageNtxt.grid(column=1, row=6)
 authorEntryList = []
 
 def clickedEnter():
-<<<<<<< HEAD
     info = txt.get()
     info1 = txt1.get()
     info2 = txt2.get()
@@ -193,7 +192,6 @@ def clickedEnter():
     txt6.delete(0, END)
     txt7.delete(0, END)
     txt8.delete(0, END)
-=======
     Jinfo = Jtxt.get()
     Jinfo1 = Jtxt1.get()
     Jinfo2 = Jtxt2.get()
@@ -216,7 +214,6 @@ def clickedEnter():
     Cinfo1.delete(0, END)
     Cinfo2.delete(0, END)
     Cinfo3.delete(0, END)
->>>>>>> 6495049806b236765d29ccecdb0f83a8fd7e703d
 
     print("Paper info entered.")
 
@@ -296,12 +293,6 @@ btn1.grid(column=999, row=999)
 
 
 
-<<<<<<< HEAD
-=======
-Atxt4 = Entry(inputInfoWindow, width=10)
-Atxt4.grid(column=1, row=14)
-
->>>>>>> 6495049806b236765d29ccecdb0f83a8fd7e703d
 '''
 def clickedAEnter():
     Ainfo = Atxt.get()
