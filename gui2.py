@@ -22,7 +22,7 @@ def insertForm(root, fields, action):
                     entry.pack(side=TOP)
                     entryValue[list(field.keys())[0]][innerField] = entry
             else:
-                authorFrame = Frame(mainMenuWindow)
+                authorFrame = Frame(root)
                 authorFrame.pack(side=TOP)
                 print(field)
                 entryValue[list(field.keys())[0]] = []
@@ -91,5 +91,30 @@ insertWindow.title("Insert Menu")
 
 
 insertForm(insertWindow, paperFields, submit)
+
+
+
+def query1Frame(window):
+    queryLabel = Label(window,text = "Paper Name")
+    queryEntry = Entry(window) 
+    queryLabel.pack(side=TOP)
+    queryEntry.pack(side=TOP)
+
+    def query1(root,name):
+        result = db.getPaper(name)
+        print(result)
+        for paper in result:
+            print(paper, ": " , result[paper])
+
+
+    processQuery = Button(window, text= "Process Query", command=lambda: query1(window,queryEntry.get()))
+    processQuery.pack(side=TOP)
+
+q1Window = Frame(insertWindow)
+q1Window.pack(side=RIGHT)
+
+
+query1Frame(q1Window)
+
 
 insertWindow.mainloop()
