@@ -91,7 +91,7 @@ insertWindow.title("Insert Menu")
 insertWindow.geometry("1500x1000")
 insertForm(insertWindow, paperFields, submit)
 
-resultLabel = Label(insertWindow, text="result display", font=('Aerial 18'))
+resultLabel = Label(insertWindow, text="result display", font=('Aerial 12'))
 resultLabel.pack(side=BOTTOM)
 
 def query1Frame(window):
