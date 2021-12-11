@@ -91,6 +91,8 @@ insertWindow.title("Insert Menu")
 insertWindow.geometry("1500x1000")
 insertForm(insertWindow, paperFields, submit)
 
+resultLabel = Label(insertWindow, text="result display", font=('Aerial 18'))
+resultLabel.pack(side=BOTTOM)
 
 def query1Frame(window):
     queryLabel = Label(window, text="Paper Name")
@@ -103,7 +105,8 @@ def query1Frame(window):
         print(result)
         for paper in result:
             print(paper, ": ", result[paper])
-
+            global resultLabel
+            resultLabel["text"] = str(result[paper])
     processQuery = Button(window, text="Process Query1", command=lambda: query1(window, queryEntry.get()))
     processQuery.pack(side=TOP)
 
@@ -122,6 +125,8 @@ def query2Frame(window):
         result = db.getPaperListByAuthor(fname, lname)
         for papers in result:
             print(papers)
+            global resultLabel
+            resultLabel["text"] = str(papers)
 
     processQuery2 = Button(window, text="Process Query2", command=lambda: query2(window, query2Entry1.get(), query2Entry2.get()))
     processQuery2.pack(side=BOTTOM)
@@ -146,23 +151,28 @@ def query3Frame(window):
         result = db.getPublicationPapers(publication, start, end)
         for papers in result:
             print(papers)
+            global resultLabel
+            resultLabel["text"] = str(papers)
 
     processQuery3 = Button(window, text="Process Query3", command=lambda: query3(window, query3Entry1.get(), query3Entry2.get(),query3Entry3.get()))
     processQuery3.pack(side=BOTTOM)
 
+
 q1Window = Frame(insertWindow)
-q1Window.pack(side=RIGHT)
+q1Window.pack(side=LEFT)
 
 query1Frame(q1Window)
 
 q2Window = Frame(insertWindow)
-q2Window.pack(side=RIGHT)
+q2Window.pack(side=LEFT)
 
 query2Frame(q2Window)
 
 q3Window = Frame(insertWindow)
-q3Window.pack(side=RIGHT)
+q3Window.pack(side=LEFT)
 
 query3Frame(q3Window)
+
+
 
 insertWindow.mainloop()
